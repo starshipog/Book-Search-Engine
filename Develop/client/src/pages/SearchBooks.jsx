@@ -14,7 +14,7 @@ import { SAVE_BOOK } from '../utils/mutations';
 
 
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
+// import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
@@ -52,7 +52,7 @@ const SearchBooks = () => {
       }
 
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      getSavedBookIds([...saveBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
@@ -157,7 +157,9 @@ const SearchBooks = () => {
     <>
       <div className="text-light bg-dark p-5">
         <Container>
+        {data ? (
           <h1>Search for Books!</h1>
+        ) : (
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
@@ -176,8 +178,18 @@ const SearchBooks = () => {
                 </Button>
               </Col>
             </Row>
-          </Form>
+          </Form> )}
         </Container>
+
+
+
+        {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
+
+
       </div>
 
       <Container>
@@ -200,10 +212,10 @@ const SearchBooks = () => {
                     <Card.Text>{book.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
+                        disabled={saveBookIds?.some((savedBookId) => savedBookId === book.bookId)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveBook(book.bookId)}>
-                        {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                        {saveBookIds?.some((savedBookId) => savedBookId === book.bookId)
                           ? 'This book has already been saved!'
                           : 'Save this Book!'}
                       </Button>
