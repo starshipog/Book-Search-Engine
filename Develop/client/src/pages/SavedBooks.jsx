@@ -63,7 +63,7 @@ const SavedBooks = () => {
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
 
-    const [removeBook, setRemoveBook] = useState({
+    const [deleteBook, setDeleteBook] = useState({
       name: '',
       email: '',
       password: '',
