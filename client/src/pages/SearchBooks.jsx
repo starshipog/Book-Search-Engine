@@ -14,12 +14,14 @@ import { SAVE_BOOK } from '../utils/mutations';
 
 
 import Auth from '../utils/auth';
-// import { saveBook, searchGoogleBooks } from '../utils/API';
+import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
 
   const [searchedBooks, setSearchedBooks] = useState([]);
+
+ 
 
 
 
@@ -61,7 +63,7 @@ const SearchBooks = () => {
   // // create state for holding returned google api data
   // const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   // // create state to hold saved bookId values
   // const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
@@ -73,52 +75,52 @@ const SearchBooks = () => {
   // });
 
   // create method to search for books and set state on form submit
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   if (!searchInput) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const response = await searchGoogleBooks(searchInput);
-
-  //     if (!response.ok) {
-  //       throw new Error('something went wrong!');
-  //     }
-
-  //     const { items } = await response.json();
-
-  //     const bookData = items.map((book) => ({
-  //       bookId: book.id,
-  //       authors: book.volumeInfo.authors || ['No author to display'],
-  //       title: book.volumeInfo.title,
-  //       description: book.volumeInfo.description,
-  //       image: book.volumeInfo.imageLinks?.thumbnail || '',
-  //     }));
-
-  //     setSearchedBooks(bookData);
-  //     setSearchInput('');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(searchedBooks);
+
+    if (!searchInput) {
+      return false;
+    }
 
     try {
-      const { data } = await saveBook({
-        variables: { ...searchedBooks },
-      });
+      const response = await searchGoogleBooks(searchInput);
 
-      Auth.login(data.addProfile.token);
-    } catch (e) {
-      console.error(e);
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
+
+      const { items } = await response.json();
+
+      const bookData = items.map((book) => ({
+        bookId: book.id,
+        authors: book.volumeInfo.authors || ['No author to display'],
+        title: book.volumeInfo.title,
+        description: book.volumeInfo.description,
+        image: book.volumeInfo.imageLinks?.thumbnail || '',
+      }));
+
+      setSearchedBooks(bookData);
+      setSearchInput('');
+    } catch (err) {
+      console.error(err);
     }
   };
+
+
+  // const saveBook = async (event) => {
+  //   event.preventDefault();
+  //   console.log(searchedBooks);
+
+  //   try {
+  //     const { data } = await saveBook({
+  //       variables: { ...searchedBooks },
+  //     });
+
+  //     Auth.login(data.addProfile.token);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
 
 // //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation 
 //   // create function to handle saving a book to our database
