@@ -10,6 +10,8 @@ const resolvers = {
       return Book.find(params);
     },
   },
+
+
   Mutation: {
     createBook: async (parent, args) => {
       const book = await Book.create(args);
@@ -23,6 +25,8 @@ const resolvers = {
       );
       return vote;
     },
+
+
     saveBook: async (parent, args) => {
       const save = await Book.save(args);
       return book;
@@ -35,17 +39,30 @@ const resolvers = {
       );
       return vote;
     },
-    // login: async (parent, args) => {
-    //   const login = await Book.delete(args);
-    //   return book;
-    // },
-    // addUser: async (parent, { _id, userNum }) => {
-    //   const addUser = await Book.findOneAndDelete(
-    //     { _id },
-    //     { new: true }
-    //   );
-    //   return vote;
-    // },
+
+
+    addUser: async (parent, { name, email, password }) => {
+      const user = await User.create({ name, email, password });
+      const token = signToken(user);
+
+      return { token, user };
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw AuthenticationError
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw AuthenticationError
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
   },
 };
 

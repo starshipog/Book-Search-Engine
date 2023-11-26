@@ -18,33 +18,33 @@ const typeDefs = `
 
 
 
-// type User {
-//   _id: ID
-//   name: String
-//   email: String
-//   bookCount: Integer
-//   savedBooks: [Book]!
-// }
+type User {
+  _id: ID
+  name: String
+  email: String
+  bookCount: Integer
+  savedBooks: [Book]!
+}
 
 
-// type books {
-//   //  (Not the _id, 
-//   // but the book's id value returned from Google's Book API.)
+type books {
+  //  (Not the _id, 
+  // but the book's id value returned from Google's Book API.)
 
-//   bookId: ID
-//   authors: [String]!
-//   descripion: String
-//   title: String
-//   image: String!
-//   link: String
-//   books: [Book]
-// }
+  bookId: ID
+  authors: [String]!
+  descripion: String
+  title: String
+  image: String!
+  link: String
+  books: [Book]
+}
 
-// type Auth {
-//   token: ID!
-//   user: User
-// }
-// `;
+type Auth {
+  token: ID!
+  user: User
+}
+`;
 
 module.exports = typeDefs;
 
