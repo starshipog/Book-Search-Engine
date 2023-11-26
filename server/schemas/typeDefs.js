@@ -22,18 +22,17 @@ type User {
   _id: ID
   name: String
   email: String
-  bookCount: Integer
+  bookCount: Int
   savedBooks: [Book]!
 }
 
 
 type books {
-  //  (Not the _id, 
-  // but the book's id value returned from Google's Book API.)
+ 
 
   bookId: ID
   authors: [String]!
-  descripion: String
+  description: String
   title: String
   image: String!
   link: String
