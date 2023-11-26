@@ -19,11 +19,10 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
 
-  const [searchedBooks, setSearchedBooks] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [searchedBooks, setSearchedBooks] = useState([]);
+
+
+
   const [saveBook, { error, data }] = useMutation(SAVE_BOOK);
 
   // update state based on form input changes
