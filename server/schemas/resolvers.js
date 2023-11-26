@@ -2,7 +2,7 @@ const { User, Book } = require('../models');
 
 const resolvers = {
   Query: {
-    user: async () => {
+    me: async () => {
       return User.find({});
     },
     books: async (parent, { _id }) => {
