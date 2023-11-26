@@ -18,7 +18,14 @@ const typeDefs = `
 
 
 
-
+type Profile {
+  _id: ID
+  name: String
+  email: String
+  # There is now a field to store the user's password
+  password: String
+  books: [String]!
+}
 
 
 type User {
@@ -30,7 +37,7 @@ type User {
 }
 
 
-type books {
+type Book {
   bookId: ID
   authors: [String]!
   description: String
