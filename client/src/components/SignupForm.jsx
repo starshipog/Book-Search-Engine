@@ -36,20 +36,43 @@ const SignupForm = () => {
       event.stopPropagation();
     }
 
+
+
+
+
+    // try {
+    //   const response = await adduser(userFormData);
+
+    //   if (!response.ok) {
+    //     throw new Error('something went wrong!');
+    //   }
+
+    //   const { token, user } = await response.json();
+    //   console.log(user);
+    //   Auth.login(token);
+    // } catch (err) {
+    //   console.error(err);
+    //   // setShowAlert(true);
+    // }
+
+
+
     try {
-      const response = await adduser(userFormData);
+      const { data } = await adduser({
+        variables: { ...userFormData },
+      });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
-      // setShowAlert(true);
+      Auth.login(data.adduser.token);
+    } catch (e) {
+      console.error(e);
     }
+  
+
+
+
+
+
+
 
     setUserFormData({
       username: '',
