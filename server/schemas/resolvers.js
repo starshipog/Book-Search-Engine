@@ -23,6 +23,29 @@ const resolvers = {
       );
       return vote;
     },
+    saveBook: async (parent, args) => {
+      const save = await Book.save(args);
+      return book;
+    },
+    removeBook: async (parent, { _id, userNum }) => {
+      const deleting = await Book.findOneAndDelete(
+        { _id },
+        { $inc: { [`user${userNum}_votes`]: 1 } },
+        { new: true }
+      );
+      return vote;
+    },
+    // login: async (parent, args) => {
+    //   const login = await Book.delete(args);
+    //   return book;
+    // },
+    // addUser: async (parent, { _id, userNum }) => {
+    //   const addUser = await Book.findOneAndDelete(
+    //     { _id },
+    //     { new: true }
+    //   );
+    //   return vote;
+    // },
   },
 };
 
