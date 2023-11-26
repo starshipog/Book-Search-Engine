@@ -65,6 +65,18 @@ const SearchBooks = () => {
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
 
+
+
+
+  // try {
+  //   const response = await fetch(
+  //     `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+  //   );
+
+
+
+
+
   // // create state to hold saved bookId values
   // const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
