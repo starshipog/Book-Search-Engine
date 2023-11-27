@@ -12,7 +12,7 @@ const SignupForm = () => {
       email: '', 
       password: '' ,
     });
-    const [adduser] = useMutation(ADD_USER);
+    const [addUser] = useMutation(ADD_USER);
   
   // // set initial form state
   // const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
@@ -22,8 +22,8 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    const { username, value } = event.target;
+    setUserFormData({ ...userFormData, [username]: value });
   };
 
   const handleFormSubmit = async (event) => {
@@ -41,7 +41,7 @@ const SignupForm = () => {
 
 
     // try {
-    //   const response = await adduser(userFormData);
+    //   const response = await addUser(userFormData);
 
     //   if (!response.ok) {
     //     throw new Error('something went wrong!');
@@ -58,11 +58,11 @@ const SignupForm = () => {
 
 
     try {
-      const { data } = await adduser({
+      const { data } = await addUser({
         variables: { ...userFormData },
       });
 
-      Auth.login(data.adduser.token);
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -90,25 +90,25 @@ const SignupForm = () => {
           Something went wrong with your signup!
         </Alert>
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
+        <Form.Group classusername='mb-3'>
+          <Form.Label htmlFor='username'>username</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your username'
-            name='username'
+            username='username'
             onChange={handleInputChange}
             value={userFormData.username}
             required
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>username is required!</Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className='mb-3'>
+        <Form.Group classusername='mb-3'>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='email'
             placeholder='Your email address'
-            name='email'
+            username='email'
             onChange={handleInputChange}
             value={userFormData.email}
             required
@@ -116,12 +116,12 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className='mb-3'>
+        <Form.Group classusername='mb-3'>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Your password'
-            name='password'
+            username='password'
             onChange={handleInputChange}
             value={userFormData.password}
             required
