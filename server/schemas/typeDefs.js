@@ -7,7 +7,7 @@ const typeDefs = `
   type Mutation {
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String!, password: String!): Auth
-  
+
   createBook(profileId: ID!, skill: String!): Profile
   createVote(profileId: ID!): Profile
   
@@ -30,7 +30,7 @@ type Profile {
 
 type User {
   _id: ID
-  name: String
+  username: String
   email: String
   bookCount: Int
   savedBooks: [Book]!
