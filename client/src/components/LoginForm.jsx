@@ -9,7 +9,6 @@ import Auth from '../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({
-    username: '', 
     email: '', 
     password: '' ,
   });
@@ -45,11 +44,10 @@ const LoginForm = () => {
       Auth.login(token);
     } catch (err) {
       console.error(err);
-      // setShowAlert(true);
+      setShowAlert(true);
     }
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
     });

@@ -6,7 +6,7 @@ export const LOGIN_USER = gql`
       token
       profile {
         _id
-        name
+        username
       }
     }
   }
@@ -31,7 +31,7 @@ export const SAVE_BOOK = gql`
   mutation saveBook($userId: ID!, $book: String!) {
     saveBook(userId: $userId, book: $book) {
       _id
-      name
+      username
       books
     }
   }
@@ -42,7 +42,7 @@ export const REMOVE_BOOK = gql`
   mutation removeBook($book: String!) {
     removeBook(book: $book) {
       _id
-      name
+      username
       books
     }
   }
