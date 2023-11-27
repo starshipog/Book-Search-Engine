@@ -45,19 +45,33 @@ const SearchBooks = () => {
       return false;
     }
 
-    try {
-      const response = await saveBook(bookToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
+    // pass in userid and book, switch to mutations and use graphql
+ 
+      try {
+        const { data } = await saveBook({
+          variables: { ...bookToSave },
+        });
+  
+        Auth.login(data.bookToSave.token);
+      } catch (e) {
+        console.error(e);
       }
+    };
 
-      // if book successfully saves to user's account, save book id to state
-      getSavedBookIdsArr([...saveBookIdsArr, bookToSave.bookId]);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+
+  //   try {
+  //     const response = await saveBook(bookToSave, token);
+
+  //     if (!response.ok) {
+  //       throw new Error('something went wrong!');
+  //     }
+
+  //     // if book successfully saves to user's account, save book id to state
+  //     getSavedBookIdsArr([...saveBookIdsArr, bookToSave.bookId]);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   
 
   // // create state for holding returned google api data
