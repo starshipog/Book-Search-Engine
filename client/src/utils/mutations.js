@@ -13,15 +13,15 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($name: String!, $email: String!, $password: String!) {
-    addUser(name: $name, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
+mutation addUser($username: String!, $email: String!, $password: String!) {
+  addUser(username: $username, email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
     }
   }
+}
 `;
 
 // HOW TO WRITE MUTATIONS FOR SAVE_BOOK? is it similar to this one for ADD_SKILL?
