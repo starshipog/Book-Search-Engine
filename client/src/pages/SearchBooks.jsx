@@ -21,7 +21,7 @@ const SearchBooks = () => {
 
   const [searchedBooks, setSearchedBooks] = useState([]);
 
- 
+  const [saveBookIdsArr, getSavedBookIdsArr] = useState([]);
 
 
 
@@ -53,7 +53,7 @@ const SearchBooks = () => {
       }
 
       // if book successfully saves to user's account, save book id to state
-      getSavedBookIds([...saveBookIds, bookToSave.bookId]);
+      getSavedBookIdsArr([...saveBookIdsArr, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
@@ -225,10 +225,11 @@ const SearchBooks = () => {
                     <Card.Text>{book.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={saveBookIds?.some((savedBookId) => savedBookId === book.bookId)}
+                        disabled={saveBookIdsArr?.some((savedBookId) => savedBookId === book.bookId)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveBook(book.bookId)}>
-                        {saveBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                        {/* {saveBookIds?.some((savedBookId) => savedBookId === book.bookId) */}
+                        {saveBookIdsArr?.some((savedBookId) => savedBookId === book.bookId)
                           ? 'This book has already been saved!'
                           : 'Save this Book!'}
                       </Button>
