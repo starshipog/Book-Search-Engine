@@ -15,31 +15,22 @@ const resolvers = {
 
 
   Mutation: {
-    createBook: async (parent, args) => {
-      const book = await Book.create(args);
-      return book;
-    },
-    createVote: async (parent, { _id, userNum }) => {
-      const vote = await Book.findOneAndUpdate(
-        { _id },
-        { $inc: { [`user${userNum}_votes`]: 1 } },
-        { new: true }
+
+    saveBook: async (parent, { _id, userNum }) => {
+      const save = await Book.findOneAndUpdate(
+        {_id},
+        {$inc: { [`user${userNum}_books`]: 1 } },
+        {new: true}
       );
-      return vote;
-    },
-
-
-    saveBook: async (parent, args) => {
-      const save = await Book.save(args);
       return book;
     },
     removeBook: async (parent, { _id, userNum }) => {
       const deleting = await Book.findOneAndDelete(
         { _id },
-        { $inc: { [`user${userNum}_votes`]: 1 } },
+        { $inc: { [`user${userNum}_books`]: 1 } },
         { new: true }
       );
-      return vote;
+      return book;
     },
 
 

@@ -8,11 +8,9 @@ const typeDefs = `
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String!, password: String!): Auth
 
-  createBook(profileId: ID!, skill: String!): Profile
-  createVote(profileId: ID!): Profile
-  
-  saveBook(profileId: ID!, skill: String!): Profile
-  removeBook(profileId: ID!): Profile
+
+  saveBook(bookType: BookInput!): User
+  removeBook(bookId: ID!): User
 
 }
 
