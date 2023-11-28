@@ -9,7 +9,7 @@ const typeDefs = `
   addUser(username: String!, email: String!, password: String!): Auth
 
 
-  saveBook(bookType: BookInput!): User
+  saveBook(bookType: String!): User
   removeBook(bookId: ID!): User
 
 }

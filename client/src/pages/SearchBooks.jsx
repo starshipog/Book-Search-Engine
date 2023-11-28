@@ -239,7 +239,7 @@ const SearchBooks = () => {
         </h2>
         <Row>
           {/* {searchedBooks.map((book) => { */}
-          {searchedBooks.map((book) => {
+          {Array.isArray(searchedBooks) ? searchedBooks.map((book) => {
             return (
               <Col md="4" key={book.bookId}>
                 <Card border='dark'>
