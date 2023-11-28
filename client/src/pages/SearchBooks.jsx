@@ -20,8 +20,8 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 const SearchBooks = () => {
 
   const [searchedBooks, setSearchedBooks] = useState([]);
-
-  const [saveBookIdsArr, getSavedBookIdsArr] = useState([]);
+  const [saveBookIdsArr, setSaveBookIdsArr] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
 
 
@@ -29,12 +29,12 @@ const SearchBooks = () => {
 
   // update state based on form input changes
   const handleSaveBook = async (bookId) => {
-    const { name, value } = event.target;
+    // const { name, value } = event.target;
 
-    setSearchedBooks({
-      ...searchedBooks,
-      [name]: value,
-    });
+    // setSearchedBooks({
+    //   ...searchedBooks,
+    //   [name]: value,
+    // });
 
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
@@ -66,14 +66,15 @@ const SearchBooks = () => {
 
 
     try {
-      const response = await saveBook(bookToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
+      const response = await saveBook({
+        variables: { bookType: { ...bookToSave } }, // Pass bookType as an object
+      });
+    
+      // Check if the mutation was successful
+      if (response.data.saveBook) {
+        // If successful, update the saved book ids state
+        setSaveBookIdsArr([...saveBookIdsArr, bookToSave.bookId]);
       }
-
-      // if book successfully saves to user's account, save book id to state
-      getSavedBookIdsArr([...saveBookIdsArr, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
@@ -83,7 +84,7 @@ const SearchBooks = () => {
   // // create state for holding returned google api data
   // const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState("");
+  // const [searchInput, setSearchInput] = useState("");
 
 
 
