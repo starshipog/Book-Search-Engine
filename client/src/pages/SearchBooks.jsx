@@ -265,8 +265,7 @@ const SearchBooks = () => {
                 </Card>
               </Col>
             );
-          })}
-        </Row>
+          }) : 'Empty' }        </Row>
       </Container>
     </>
   );
