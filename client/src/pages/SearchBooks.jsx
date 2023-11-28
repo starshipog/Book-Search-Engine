@@ -46,6 +46,7 @@ const SearchBooks = () => {
     }
 
 
+    const searchBookData = Array.from(searchedBooks);
 
 
    // pass in userid and book, switch to mutations and use graphql
@@ -224,6 +225,12 @@ const SearchBooks = () => {
 
       </div>
 
+
+      {/* const searchBookData = Array.from(searchedBooks); */}
+
+
+
+
       <Container>
         <h2 className='pt-5'>
           {searchedBooks.length
@@ -231,6 +238,7 @@ const SearchBooks = () => {
             : 'Search for a book to begin'}
         </h2>
         <Row>
+          {/* {searchedBooks.map((book) => { */}
           {searchedBooks.map((book) => {
             return (
               <Col md="4" key={book.bookId}>
