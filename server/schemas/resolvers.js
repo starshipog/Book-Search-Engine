@@ -18,6 +18,7 @@ const resolvers = {
 
     saveBook: async (parent, { bookType }, context ) => {
       console.log(bookType)
+      console.log(context)
       const save = await User.findOneAndUpdate(
         { _id: context.user._id },
         {$push: { savedBooks: bookType } },
