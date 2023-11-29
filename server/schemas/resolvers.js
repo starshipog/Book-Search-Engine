@@ -16,21 +16,22 @@ const resolvers = {
 
   Mutation: {
 
-    saveBook: async (parent, { _id, userNum }) => {
+    saveBook: async (parent, { bookType }, context ) => {
+      console.log(bookType)
       const save = await User.findOneAndUpdate(
-        {_id},
-        {$inc: { [`user${userNum}_books`]: 1 } },
+        { _id: context.user._id },
+        {$push: { savedBooks: bookType } },
         {new: true}
       );
-      return book;
+      return save;
     },
-    removeBook: async (parent, { _id, userNum }) => {
+    removeBook: async (parent, { bookType }, context ) => {
       const deleting = await Book.findOneAndDelete(
-        { _id },
-        { $inc: { [`user${userNum}_books`]: 1 } },
-        { new: true }
+        { _id: context.user._id },
+        {$push: { savedBooks: bookType } },
+        {new: true}
       );
-      return book;
+      return deleting;
     },
 
 
