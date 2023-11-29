@@ -9,7 +9,7 @@ const resolvers = {
     },
     books: async (parent, { _id }) => {
       const params = _id ? { _id } : {};
-      return Book.find(params);
+      return User.find(params);
     },
   },
 
@@ -17,7 +17,7 @@ const resolvers = {
   Mutation: {
 
     saveBook: async (parent, { _id, userNum }) => {
-      const save = await Book.findOneAndUpdate(
+      const save = await User.findOneAndUpdate(
         {_id},
         {$inc: { [`user${userNum}_books`]: 1 } },
         {new: true}
